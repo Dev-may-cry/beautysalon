@@ -1,0 +1,845 @@
+/* Seletores universais -------------------------------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  /* Ele zerou aqui em cima os valores padrões da box */
+  /* Para customizá-lo em outras tags */
+
+  box-sizing: border-box;
+  /* Serve pra individualizar a box dessa tag */
+}
+
+:root {
+  --header-height: 4.5rem;
+  --hue: 345;
+  --base-color: hsl(var(--hue) 36% 57%);
+  --base-color-second: hsl(var(--hue) 65% 88%);
+  --base-color-alt: hsl(var(--hue) 57% 53%);
+  --title-color: hsl(var(--hue) 41% 10%);
+  --text-color: hsl(0 0% 46%);
+  --text-color-light: hsl(0 0% 98%);
+  --body-color: hsl(0 0% 98%);
+
+  --color: green;
+
+  --title-font-size: 1.875rem;
+  --subtitle-font-size: 1rem;
+
+  --title-font: 'Poppins', sans-serif;
+  --body-font: 'DM Sans', sans-serif;
+}
+
+/* Para deixar a rolavem da página suave */
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+
+
+
+/* Seletores gerais do body ----------------------------- */
+
+body {
+  font: 400 1rem var(--body-font);
+  /* Haja especificação aqui c-c */
+  /* Se ele não achar a "DM", ele mostra a sans */
+  color: var(--text-color);
+  background: var(--body-color);
+  --webkit-font-smoothing: antialiased;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  /* Essa tira a linha dos links */
+}
+
+.title {
+  font: 700 var(--title-font-size) var(--title-font);
+  color: var(--title-color);
+  --webkit-font-smoothing: auto;
+}
+
+
+
+
+
+
+/* Seletores do cabeçalho ------------------------------- */
+
+#Header {
+  width: 100%;
+  /* Fixa a camada do cabeçalho na página */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: var(--body-color);
+
+  /* Atributos da linha divisória do cabeçalho */
+  border-bottom: 1px solid #E4E4E4;
+  margin-bottom: 2rem;
+  display: flex;
+}
+
+#Header.scroll {
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
+  /* Sombra embaixo do cabeçalho */
+}
+
+/* Especificações da logo da página */
+.logo {
+  font: 700 1.31rem var(--title-font);
+  color: var(--title-color);
+}
+
+.logo span {
+  color: var(--base-color);
+}
+
+/* Especificação dos elementos do cabeçalho da página */
+nav {
+  display: flex;
+  /* Esse serve pra dispor os elementos um ao lado do outro */
+  justify-content: space-between;
+  /* E esse, para separá-los em cada extremidade */
+  height: 4.5rem;
+  /* Aqui, eu optei por 4,5 (*16 pixels) de altura */
+  align-items: center;
+  width: 100%;
+}
+
+/* Usar uma medida "rem" o tornará mais responsivo */
+/* Diferente do pixel que é fixo, ela é flexível */
+
+nav .menu {
+  opacity: 0;
+  visibility: hidden;
+  top: -20rem;
+  transition: 0.2s;
+}
+
+nav .menu ul {
+  display: none;
+}
+
+
+nav ul li {
+  text-align: center;
+}
+
+nav ul li a {
+  transition: 0.2s;
+  position: relative;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: var(--base-color);
+}
+
+nav ul li a::after
+{
+  /* Todo pseudo-elemento (before/after) precisa do content */
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: var(--base-color);
+  position: absolute;
+  /* O absolute coloca o elemento no eixo Z */
+  left: 0;
+  bottom: -1.5rem;
+  transition: width .2s;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+  width: 100%;
+}
+
+nav.show .menu {
+  opacity: 1;
+  visibility: visible;
+  background: var(--body-color);
+
+  height: 100vh;
+  /* 100 viewport height, ou seja, toda a altura do dispositivo */
+  width: 100vw;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* O fixed coloca o elemento no eixo Z e o fixa na tela */
+
+  display: grid;
+  place-content: center;
+}
+/* O "NAV.SHOW" sem espaço significa que ele procurará a classe .menu QUANDO o NAV possuir a classe SHOW */
+
+nav.show .menu ul {
+  display: grid;
+}
+
+/* ul.grid vai aumentar a especificadade dele, lhe dando mais prioridade */
+nav.show ul.grid {
+  gap: 4rem;
+}
+
+nav .icon-close {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  right: 1.5rem;
+  top: -1.5rem;
+  transition: 0.2s;
+}
+
+nav.show div.icon-close {
+  visibility: visible;
+  opacity: 1;
+  top: 1.5rem;
+}
+
+/* Aqui estão as opções do menu */
+.options {
+  font: 700 1.875rem var(--title-font);
+  color: var(--title-color);
+  --webkit-font-smoothing: auto;
+}
+
+/* No toggle está especificado o botão do menu */
+.toggle {
+  color: var(--base-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+
+
+
+
+
+/* Seletores da página principal ---------------------- */
+
+.container {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.section {
+  padding: calc(5rem + var(--header-height)) 0;
+  /* Quando usa o 0, só as laterais são afetadas */
+
+}
+
+/* Parcialmente feito por mim :) */
+.section header {
+  margin-bottom: 4rem;
+}
+
+/* Parcialmente feito por mim :) */
+.section header strong {
+  color: var(--base-color);
+}
+
+.section .title {
+  margin-bottom: 1rem;
+  color: var(--title-color);
+}
+
+.section subtitle {
+  font-size: var(--subtitle-font-size);
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+/* O grid nos permite usar propriedades especiais, como o gap */
+/* Por causa desse seletor, todas as div filhas dele ficarão separadas por 32 pixels (2rem) */
+
+img {
+  width: 100%;
+  /* Esse deve deixar do tamanho certinho da tela */
+  height: auto;
+}
+
+#home {
+  overflow: hidden;;
+  /* Esse impede a largura da página de ficar transbordando */
+}
+
+#home .container {
+  margin: 0;
+}
+
+#home .imagem {
+  position: relative;
+}
+
+/* Esse serve para criar elementos fictícios */
+#home .imagem::before {
+  content: "";
+  background: var(--base-color-second);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: -16.8%;
+  left: 16.7%;
+  z-index: 0;
+  /* O z index pode sobrepor algo, usando a terceira dimensão de profundidade */
+}
+
+#home .imagem img {
+  position: relative;
+  right: 2.93rem;
+}
+
+#home .imagem img,
+#home .imagem::before {
+  border-radius: 0.25rem;
+}
+
+#home .text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  text-align: center;
+}
+
+#home .text h2 {
+  margin-bottom: 1rem;
+}
+
+#home .text p {
+  margin-bottom: 2rem;
+}
+
+.button {
+  background-color: var(--base-color);
+  color: var(--text-color-light);
+  height: 3.5rem;
+  display: inline-flex;
+  /* Esse display parece ser complexo como o position */
+  align-items: center;
+  padding: 0 2rem;
+  border-radius: 0.25rem;
+  font: 500 1rem var(--body-font);
+  transition: background 0.5s;
+}
+
+/* Esse diz o que acontecerá quando o mouse ficar em cima do botão */
+.button:hover {
+  background: var(--base-color-alt);
+}
+
+.divider-1 {
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue), 36%, 57%, 1) 0%,
+    hsla(var(--hue), 65%, 88%, 0.34%) 100%
+  );
+}
+
+
+
+
+
+
+/* Seletores da segunda página ------------------------- */
+
+#about {
+  background: white;
+}
+
+#about .container {
+  margin: 0;
+}
+/* Isso fará a imagem colar nas bordas <> da página */
+
+#about .imagem {
+  position: relative;
+
+}
+
+#about .imagem::before {
+  content: "";
+  background: var(--base-color-second);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: -8.3%;
+  left: -33%;
+  z-index: 0;
+  /* O z index pode sobrepor algo, usando a terceira dimensão de profundidade */
+}
+
+/* Esse serve para criar elementos fictícios */
+
+#about .imagem img {
+  position: relative;
+}
+
+#about .imagem img,
+#about .imagem::before {
+  border-radius: 0.25rem;
+}
+
+#about .text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.divider-2 {
+  height: 1px;
+  background: linear-gradient(
+    270deg,
+    hsla(var(--hue), 65%, 88%, 0.34%),
+    hsla(var(--hue), 36%, 57%, 1)
+  );
+}
+
+
+
+
+
+
+
+/* Seção de serviços ------------------------------- */
+
+
+.cards.grid {
+  gap: 1.5rem;
+}
+
+.card {
+  /* Preenchimento cima-baixo e nas laterais */
+  padding: 3.625rem 2rem;
+  /* Pra deixar as macras sombreadas nos cartões */
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.08);
+  /* Para criar a borda inferior dos cartõs*/
+  border-bottom: 0.25rem solid var(--base-color);
+  /* Para arredondar as pontas, mas só em cima */
+  border-radius: 0.25rem 0.25rem 0 0;
+  text-align: center;
+}
+
+.card i {
+  display: block;
+  /* Se eu entendi bem, ele "vira" um bloco quadrado? */
+
+  margin-bottom: 1.5rem;
+
+  font-size: 5rem;
+  /* Para definir o tamanho do ícone */
+
+  color: var(--base-color);
+}
+
+.card .title {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+
+
+
+
+
+
+#testimonials {
+  background: white;
+}
+
+#testimonials .container {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#testimonials header {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-bottom: 0;
+}
+
+#testimonials blockquote {
+  padding: 2rem;
+
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 0.25rem;
+  /* Esse parece ser o valor padrão pra arredondamento */
+}
+
+#testimonials blockquote p {
+  position: relative;
+  /* Para segurar o absolute abaixo apenas dentro do p */
+  text-indent: 1.875rem;
+  /* Aqui fica o espaço do início do parágrafo */
+  margin-bottom: 1.5rem;
+  color: var(--title-color);
+}
+
+#testimonials blockquote p span {
+  font: 700 3rem serif;
+  /* Espessura, altura e estilo */
+
+  position: absolute;
+  top: -0.8rem;
+  left: -1.875rem;
+  color: var(--base-color);
+}
+
+#testimonials cite {
+  display: flex;
+  align-items: center;
+  /* Coloca os itens em uma linha central imaginária */
+  font-style: normal;
+  /* Para tirar o italic da tag "cite" */
+  }
+
+#testimonials cite img {
+  width: 2rem;
+  height: 2rem;
+  /* Para deixar as imagens em tamanho de ícone */
+  object-fit: cover;
+  /* Ajeita a img na box de forma a manter sua integridade */
+  clip-path: circle();
+  /* Cria um circulo em volta da imagem */
+  margin-right: 0.5rem;
+}
+
+.swiper-slide {
+  height: auto;
+  padding: 4rem 1rem;
+}
+/* Configuração para fazer a sombra dos slides aparecerem */
+/* Entre outras coisas da box dos depoimentos */
+
+.swiper-pagination-bullet-active {
+  background: var(--base-color) !important;
+}
+/* Usei pra sobrepor a cor padrão dos bullet de navegação */
+/* Já que não consegui priorizar ele */
+
+
+
+
+
+
+
+
+
+#contact .grid {
+  gap: 4rem;
+}
+
+#contact .text p {
+  margin-bottom: 2rem;
+}
+
+#contact .button i,
+#contact ul li i 
+{
+  font-size: 1.5rem;
+  margin-right: 0.625rem;
+}
+/* Usei o font-size para aumentar o tamanho do ícone */
+
+#contact ul.grid {
+  gap: 2rem;
+}
+
+#contact ul li {
+  display: flex;
+  align-items: center;
+  /* Coloquei os ítens no centro da mesma linha */
+}
+
+#contact ul li i {
+  color: var(--base-color);
+}
+
+
+
+
+
+
+footer {
+  background: var(--base-color);
+}
+
+footer.section {
+  padding: 4rem 0;
+  /* Esse 0 é pra não mecher nas laterais */
+}
+
+.logo-alt span {
+  color: var(--body-color);
+}
+
+footer .logo {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+/* Como o logo está na tag A, não podemos mecher na sua margin-bottom */
+/* Isso porque a tag A tem por padrão o display:inline */
+/* Por isso, usamos o inline-block aqui */
+
+footer .brand p {
+  color: var(--text-color-light);
+  margin-bottom: 0.75rem;
+}
+
+footer i {
+  font-size: 1.5rem;
+  color: var(--text-color-light);
+}
+
+footer .social {
+  grid-auto-flow: column;
+  width: fit-content;
+}
+
+footer .social a {
+  transition: 0.3s;
+  display: inline-block;
+  /* Precisa mecher no inline pra habilitar o transform */
+}
+
+footer .social a:hover {
+  transform: translateY(-8px);
+}
+
+
+
+
+
+
+.back-to-top {
+  background: var(--base-color);
+  color: var(--text-color-light);
+
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+
+  padding: 0.5rem;
+  clip-path: circle();
+  font-size: 1.5rem;
+  line-height: 0;
+
+  visibility: hidden;
+  opacity: 0;
+  /* Faremos ele aparecer com Javascript */
+
+  transition: 0.3s;
+
+  transform: translateY(100%);
+  /* O transform é outra propriedade especial */
+  /* Ela "desbloqueia" novas possibilidades, como o translate */
+  /* O translate 100% o colocará um pouco abaixo */
+}
+
+.back-to-top.show {
+  visibility: visible;
+  opacity: 1;
+
+  transform: translateY(0);
+  /* Já o translate 0 o devolverá a posição original */
+}
+
+
+
+
+
+
+@media (min-width: 1200px) {
+
+  .container {
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+
+  /* Menu de navegação */
+
+  .logo {
+    font: 700 1.7rem var(--title-font);
+  }
+
+  .section {
+    padding: 10rem 0;
+  }
+
+  .section header,
+  #testimonials header 
+  {
+    margin: 0 auto;
+    max-width: 32rem;
+    text-align: center;
+  }
+
+  .button {
+    height: 3.125rem;
+    text-align: center;
+  }
+
+
+  nav .menu {
+    opacity: 1;
+    visibility: visible;
+  }
+  /* Para mostrar as opções do menu */
+
+  nav .menu ul {
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav .menu ul li a.options {
+    font: 600 1rem var(--body-font);
+    --webkit-font-smoothing: antialiased;
+  }
+
+  nav .menu ul li a.options.active {
+    font-weight: bold;
+    --webkit-font-smoothing: auto;
+  }
+
+  nav .icon-menu {
+    display: none;
+  }
+
+
+
+
+
+
+
+
+  #home .container {
+    grid-auto-flow: column;
+    justify-content: space-between;
+    margin: 0 auto; 
+  }
+
+  #home .imagem {
+    order: 1;
+    right: -2rem;
+  }
+
+  #home .text {
+    order: 0;
+    max-width: 24rem;
+    text-align: left;
+    margin-right: 7.375rem;
+    margin-left: -2rem;
+  }
+  /* O uso do order só é possível pois .text e .imagem estão em uma caixa GRID */
+  /* Assim, ele inverte a ordem de exibição dos dois */
+
+  main {
+  /* Esse código é para empurrar a camada do site pra baixo do NAV */
+  margin-top: var(--header-height);
+  }
+
+
+
+  #about .container {
+    margin: 0;
+    /* Para alinhar as laterais */
+    grid-auto-flow: column;
+  }
+
+  #about .text {
+    margin-left: 2rem;
+    margin-right: -10rem;
+  }
+
+  #about .imagem img {
+    width: 100%;
+  }
+
+
+
+  .cards {
+    grid-template-columns: 1fr 1fr 1fr;
+    /* Divide em três colunas de tamanhos iguais */
+    /* FR é de fração */
+  }
+
+  .card {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+
+
+  #testimonials .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+
+  #contact .container {
+    grid-auto-flow: column;
+    align-items: center;
+    /* Alinha os elementos da caixa no eixo X */
+  }
+
+  #contact .text {
+    max-width: 25rem;
+  }
+
+
+  footer .container {
+    padding: 0;
+
+    grid-auto-flow: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer .logo {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .title {
+    font-size: 2.25rem;
+  }
+
+  :root {
+    --title-font-size: 2.2rem;
+    --subtitle-font-size: 1.125rem;
+  }
+}
+
+
+
+/* Códigos meus */
+
+/* Antes de codar, identifique repetições */
+
+/* O position (não sei se todos) cria uma nova camada! */
+
+/* O !important no valor do atributo do seleor dá prioridade máxima a ele */
+
+
+
+
+/* 
+
+Mudanças: 
+
+*/
