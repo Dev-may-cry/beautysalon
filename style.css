@@ -675,10 +675,6 @@ footer .social a:hover {
     font: 700 1.7rem var(--title-font);
   }
 
-  .section {
-    padding: 10rem 0;
-  }
-
   .section header,
   #testimonials header 
   {
