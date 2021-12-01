@@ -44,7 +44,6 @@ html {
 
 body {
   font: 400 1rem var(--body-font);
-  /* Haja especificação aqui c-c */
   /* Se ele não achar a "DM", ele mostra a sans */
   color: var(--text-color);
   background: var(--body-color);
@@ -106,11 +105,8 @@ a {
 /* Especificação dos elementos do cabeçalho da página */
 nav {
   display: flex;
-  /* Esse serve pra dispor os elementos um ao lado do outro */
   justify-content: space-between;
-  /* E esse, para separá-los em cada extremidade */
   height: 4.5rem;
-  /* Aqui, eu optei por 4,5 (*16 pixels) de altura */
   align-items: center;
   width: 100%;
 }
@@ -238,12 +234,10 @@ nav.show div.icon-close {
 
 }
 
-/* Parcialmente feito por mim :) */
 .section header {
   margin-bottom: 4rem;
 }
 
-/* Parcialmente feito por mim :) */
 .section header strong {
   color: var(--base-color);
 }
@@ -432,7 +426,6 @@ img {
 
 .card i {
   display: block;
-  /* Se eu entendi bem, ele "vira" um bloco quadrado? */
 
   margin-bottom: 1.5rem;
 
@@ -823,19 +816,9 @@ footer .social a:hover {
 
 
 
-/* Códigos meus */
 
 /* Antes de codar, identifique repetições */
 
 /* O position (não sei se todos) cria uma nova camada! */
 
-/* O !important no valor do atributo do seleor dá prioridade máxima a ele */
-
-
-
-
-/* 
-
-Mudanças: 
-
-*/
+/* O !important no valor do atributo do seletor dá prioridade máxima a ele */
