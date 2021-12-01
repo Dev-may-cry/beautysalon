@@ -183,13 +183,5 @@ window.addEventListener('scroll', function() {
 
 
 
-
-/* Interações:
-
--- crie a variável com o objeto a ser alterado 
--- crie a função que meche com o que você quer
-
-*/
-
 /* Definir um elemento: .querySelector (e adicione o caminho) */
 /* Para mais de um elemento: .querySelectorAll */
