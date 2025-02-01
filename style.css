@@ -12,7 +12,7 @@
 
 :root {
   --header-height: 4.5rem;
-  --hue: 345;
+  --hue: 18;
   --base-color: hsl(var(--hue) 36% 57%);
   --base-color-second: hsl(var(--hue) 65% 88%);
   --base-color-alt: hsl(var(--hue) 57% 53%);
